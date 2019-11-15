@@ -58,7 +58,16 @@ if ("recognitionResults" in analysis):
                 for line in analysis["recognitionResults"][0]["lines"]]
 c=image_path.rfind("\\")
 file_name=image_path[:c]
-file_name=file_name+"\\"+analysed_text[0][1]+"_"+analysed_text[1][1]+'.txt'
+s=analysed_text[0][1].rfind(":")
+subject=analysed_text[0][1][s+2:]
+s1=analysed_text[1][1].rfind(":")
+srn=analysed_text[1][1][s1+2:]
+srn=''.join(srn.split(' '))
+print(subject)
+print(srn)
+file_name=file_name+"\\"+subject+"_"+srn+'.txt'
+print(file_name)
 with open(file_name,"a+") as f:
+    f.write(analysed_text[0][1]+'\n'+analysed_text[1][1]+'\n')
     for i in range(2,len(analysed_text)):
         f.write(analysed_text[i][1]+' ')
